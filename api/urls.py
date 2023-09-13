@@ -10,6 +10,8 @@ urlpatterns = [
     path('prayerRequest', views.prayerRequestView),
     path('addPrayerRequest', views.addprayerRequest),
     path('deletePrayerRequest/<str:pk>/', views.deletePrayerRequest),
-    path('gallery/', views.gallerys)
+    path('gallery/', views.gallerys),
+    path('event/', views.events),
+    path('life_youtube/', views.life_youtubes),
 
 ]

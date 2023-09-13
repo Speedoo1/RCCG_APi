@@ -2,8 +2,8 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from api.models import testimonial, prayerRequest, gallery
-from api.serializer import testimonialserializer, prayerRequestserializer, galleryserializer
+from api.models import testimonial, prayerRequest, gallery, event, life_youtube
+from api.serializer import testimonialserializer, prayerRequestserializer, galleryserializer, eventserializer
 
 
 # Create your views here.
@@ -89,4 +89,26 @@ def gallerys(request):
         return Response(serialize.data)
     else:
         context = {'empty': 'no gallery yet'}
+        return Response(context)
+
+
+@api_view(['GET'])
+def events(request):
+    getevent = event.objects.all()
+    if getevent:
+        serialize = eventserializer(getevent, many=True)
+        return Response(serialize.data)
+    else:
+        context = {'empty': 'no event yet'}
+        return Response(context)
+
+
+@api_view(['GET'])
+def life_youtubes(request):
+    getlife_youtube = life_youtube.objects.all()
+    if getlife_youtube:
+        serialize = eventserializer(getlife_youtube, many=True)
+        return Response(serialize.data)
+    else:
+        context = {'empty': 'no life_youtubes yet'}
         return Response(context)

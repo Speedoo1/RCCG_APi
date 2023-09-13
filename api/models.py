@@ -35,6 +35,7 @@ class prayerRequest(models.Model):
 
 class gallery(models.Model):
     id = models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True)
+
     images = models.ImageField()
 
     # def __init__(self, *args, **kwargs):
@@ -48,3 +49,23 @@ class gallery(models.Model):
 
     def __str__(self):
         return str(self.images)
+
+
+class event(models.Model):
+    id = models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True)
+
+    name = models.CharField(max_length=1000, null=True, blank=False)
+    date = models.CharField(max_length=1000, null=True, blank=True)
+    about = models.TextField()
+    image = models.ImageField()
+
+    def __str__(self):
+        return str(self.name)
+
+
+class life_youtube(models.Model):
+    id = models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True)
+    url = models.CharField(max_length=500, null=True, blank=True)
+
+    def __str__(self):
+        return str(self.url)
