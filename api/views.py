@@ -2,8 +2,9 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from api.models import testimonial, prayerRequest, gallery, event, life_youtube
-from api.serializer import testimonialserializer, prayerRequestserializer, galleryserializer, eventserializer
+from api.models import testimonial, prayerRequest, gallery, event, life_youtube, newsletter
+from api.serializer import testimonialserializer, prayerRequestserializer, galleryserializer, eventserializer, \
+    youtubeserializer
 
 
 # Create your views here.
@@ -107,8 +108,26 @@ def events(request):
 def life_youtubes(request):
     getlife_youtube = life_youtube.objects.all()
     if getlife_youtube:
-        serialize = eventserializer(getlife_youtube, many=True)
+        serialize = youtubeserializer(getlife_youtube, many=True)
         return Response(serialize.data)
     else:
         context = {'empty': 'no life_youtubes yet'}
         return Response(context)
+
+
+# @api_view(['GET'])
+def newsletters(request):
+    if request.method == 'POST':
+
+        emails = request.POST.get('email')
+        try:
+            news = newsletter.objects.get(email=emails)
+        except:
+            newsletter(email=emails)
+            if newsletter:
+                emails.save()
+                context = {'saved': 'email saved successfully'}
+                return Response(context)
+            else:
+                return Response({'error:': 'error saving email'})
+    return Response({'exist': 'Email already exist '})

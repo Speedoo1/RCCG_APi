@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from api.models import prayerRequest, testimonial, gallery, event, life_youtube
+from api.models import prayerRequest, testimonial, gallery, event, life_youtube, newsletter
 
 
 class testimonialserializer(serializers.ModelSerializer):
@@ -30,4 +30,10 @@ class eventserializer(serializers.ModelSerializer):
 class youtubeserializer(serializers.ModelSerializer):
     class Meta:
         model = life_youtube
+        fields = '__all__'
+
+
+class newsletterserializer(serializers.ModelSerializer):
+    class Meta:
+        model = newsletter
         fields = '__all__'

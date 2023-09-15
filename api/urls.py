@@ -13,5 +13,6 @@ urlpatterns = [
     path('gallery/', views.gallerys),
     path('event/', views.events),
     path('life_youtube/', views.life_youtubes),
+    path('new-letter/',views.newsletters)
 
 ]
